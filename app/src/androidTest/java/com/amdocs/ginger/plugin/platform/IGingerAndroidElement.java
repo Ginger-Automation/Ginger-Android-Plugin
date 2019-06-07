@@ -1,6 +1,6 @@
 package com.amdocs.ginger.plugin.platform;
 
-interface IGingerAndroidElement
+public interface IGingerAndroidElement
 {
     Object Element = null;
 

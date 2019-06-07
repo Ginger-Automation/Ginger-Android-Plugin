@@ -1,7 +1,7 @@
 package com.amdocs.ginger.plugin.platform;
 
 
-interface ILocateAndroidElement
+public interface ILocateAndroidElement
 {
     IGingerAndroidElement LocateElementByID(eElementType elementType, String id);
 

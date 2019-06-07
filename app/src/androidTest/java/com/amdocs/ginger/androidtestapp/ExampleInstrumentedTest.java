@@ -24,7 +24,10 @@ import androidx.test.uiautomator.By;
 import androidx.test.uiautomator.Until;
 
 import com.amdocs.ginger.androidtestapp.AndroidDevice;
+import com.amdocs.ginger.plugin.core.CommLib.GingerSocketClient;
 import com.amdocs.ginger.plugin.core.GingerAction;
+import com.amdocs.ginger.plugin.platform.IGingerAndroidElement;
+import com.amdocs.ginger.plugin.platform.eElementType;
 
 import static org.junit.Assert.*;
 
@@ -44,7 +47,9 @@ public class ExampleInstrumentedTest {
     private UiDevice device;
 
     @Test
-    public void startMainActivityFromHomeScreen() {
+    public void startMainActivityFromHomeScreen()
+    {
+        ConnectToGingerGrid();
         // Initialize UiDevice instance
         UiDevice device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation());
 
@@ -66,6 +71,11 @@ public class ExampleInstrumentedTest {
         // Wait for the app to appear
         device.wait(Until.hasObject(By.pkg(BASIC_SAMPLE_PACKAGE).depth(0)),
                 LAUNCH_TIMEOUT);
+    }
+
+    private void ConnectToGingerGrid() {
+        GingerSocketClient gingerSocketClient = new GingerSocketClient();
+        gingerSocketClient.connect();
     }
 
 
@@ -137,8 +147,11 @@ public class ExampleInstrumentedTest {
 
     }
 
+    private void PlatformTest() {
+        AndroidPlatform androidPlatform = new AndroidPlatform();
+        IGingerAndroidElement elem = androidPlatform.LocateAndroidElement.LocateElementByID(eElementType.Button, "bid");
 
-
+    }
 
 
     private void Init()
