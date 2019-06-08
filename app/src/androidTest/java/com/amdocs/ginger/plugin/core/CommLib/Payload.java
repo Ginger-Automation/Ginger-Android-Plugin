@@ -36,6 +36,21 @@ public class Payload {
     
 	final int cNULLStringLen = -1;
 
+
+    public enum ePaylodType
+    {
+                Unknown,   // default so need to be set
+                SocketRequest,
+                SocketResponse ,
+                RequestPayload ,
+                ResponsePayload,
+                DriverRequest  // for example attach Display
+    }
+
+    public ePaylodType payloadType = ePaylodType.Unknown;
+
+
+
     public Payload(String Name)
     {
         this.Name = Name;
@@ -43,9 +58,35 @@ public class Payload {
         WriteString(Name);
     }
 
+
+
     private void WritePayloadType()
     {
-        mBuffer[mBufferIndex] = (byte)3; // 3= request (byte)PaylodType;   // temp !!!!!!!!!!!!!!!!!!!!!!!
+        byte btype = 0;
+        switch (payloadType)
+        {
+            case Unknown:
+                btype = 0;
+                break;
+            case SocketRequest:
+                btype = 1;
+                break;
+            case SocketResponse:
+                btype = 2;
+                break;
+            case RequestPayload:
+                btype = 3;
+                break;
+            case ResponsePayload:
+                btype = 4;
+                break;
+            case DriverRequest:
+                btype = 5;
+                break;
+        }
+
+
+        mBuffer[mBufferIndex] = btype; //payloadType; // 3= request (byte)PaylodType;   // temp !!!!!!!!!!!!!!!!!!!!!!!
         mBufferIndex++;
     }
 
@@ -706,84 +747,85 @@ public class Payload {
     
 	public String toString()
 	{
-        StringBuffer SB = new StringBuffer();
-        SB.append("-------------------------------------------------------------------------\n");
-        SB.append("Payload Content:\n");
-        int CurrentBufferIndex = mBufferIndex; // Keep the current index and restore later
-        mBufferIndex = 4;
-
-        // !!!!!!!!!!!!!! temp type
-        mBufferIndex++;
-
-        SB.append("Name = " + ReadString() + "\n");
-        SB.append("Len = " + GetDataLen() + "\n");        
-    
-        // SB.append("Type = " + readbyt GetDataLen() + "\n");        
-
-        byte ValueType = mBuffer[mBufferIndex];
-        while (ValueType != LastByteMarker)
-        {
-            switch (ValueType)
-            {
-                case 1:
-                    String s1 = GetValueString();
-                    SB.append("String = " + s1 + "\n");
-                    break;
-                case 2:
-                    int i = GetValueInt();
-                    SB.append("Int = " + i + "\n");
-                    break;
-                case 3:
-                    String e1 = GetValueEnum();
-                    SB.append("Enum = " + e1 + "\n");
-                    break;
-                case 4:                	
-                     String s16 = GetValueString();
-                     SB.append("StringUTF16 = " + s16 + "\n");
-                    break;
-                case 5:
-                	List<String> list = GetListString();      
-                	SB.append("List<String> = " + "\n");
-                	SB.append("List Size = " + list.size() + "\n");
-                	int si=0;
-            		for (String s : list)
-            		{
-            			SB.append( si + ": " + s + "\n");
-            			si++;
-            		}
-                case 6: // List of Payloads
-                	List<Payload> plist = GetListPayload();
-                	SB.append("List<Payload> = " + "\n");
-                	SB.append("List Size = " + plist.size() + "\n");
-                	int pli = 0;
-                	for (Payload pl : plist)
-            		{
-            			SB.append( pli + ": " + pl.toString() + "\n");
-            			pli++;
-                    }
-//                    case 7:
-//                        byte[] b =  GetBytes();
-//                          //Bytes - for screen shot or any binary
-//                        s += "Bytes(Binary), Len=" + b.Length  + "\n";
-//                        break;
-//                    case 8: // Guid
-//                        Guid g = GetGuid();
-//                        s += "GUID= " + g.ToString() + "\n";
-//                        break;
-//                    case 9: // bool false
-//                        s += "bool=false " + "\n";
-//                        break;
-//                    case 10: // bool true
-//                        s += "bool=true " + "\n";
-//                        break;
-                default:
-            }
-            ValueType = mBuffer[mBufferIndex];
-        }
-        
-        SB.append("-------------------------------------------------------------------------");
-        
-        mBufferIndex = CurrentBufferIndex;
-        return SB.toString();		
+	    return "FIXME toString";
+//        StringBuffer SB = new StringBuffer();
+//        SB.append("-------------------------------------------------------------------------\n");
+//        SB.append("Payload Content:\n");
+//        int CurrentBufferIndex = mBufferIndex; // Keep the current index and restore later
+//        mBufferIndex = 4;
+//
+//        // !!!!!!!!!!!!!! temp type
+//        mBufferIndex++;
+//
+//        SB.append("Name = " + ReadString() + "\n");
+//        SB.append("Len = " + GetDataLen() + "\n");
+//
+//        // SB.append("Type = " + readbyt GetDataLen() + "\n");
+//
+//        byte ValueType = mBuffer[mBufferIndex];
+//        while (ValueType != LastByteMarker)
+//        {
+//            switch (ValueType)
+//            {
+//                case 1:
+//                    String s1 = GetValueString();
+//                    SB.append("String = " + s1 + "\n");
+//                    break;
+//                case 2:
+//                    int i = GetValueInt();
+//                    SB.append("Int = " + i + "\n");
+//                    break;
+//                case 3:
+//                    String e1 = GetValueEnum();
+//                    SB.append("Enum = " + e1 + "\n");
+//                    break;
+//                case 4:
+//                     String s16 = GetValueString();
+//                     SB.append("StringUTF16 = " + s16 + "\n");
+//                    break;
+//                case 5:
+//                	List<String> list = GetListString();
+//                	SB.append("List<String> = " + "\n");
+//                	SB.append("List Size = " + list.size() + "\n");
+//                	int si=0;
+//            		for (String s : list)
+//            		{
+//            			SB.append( si + ": " + s + "\n");
+//            			si++;
+//            		}
+//                case 6: // List of Payloads
+//                	List<Payload> plist = GetListPayload();
+//                	SB.append("List<Payload> = " + "\n");
+//                	SB.append("List Size = " + plist.size() + "\n");
+//                	int pli = 0;
+//                	for (Payload pl : plist)
+//            		{
+//            			SB.append( pli + ": " + pl.toString() + "\n");
+//            			pli++;
+//                    }
+////                    case 7:
+////                        byte[] b =  GetBytes();
+////                          //Bytes - for screen shot or any binary
+////                        s += "Bytes(Binary), Len=" + b.Length  + "\n";
+////                        break;
+////                    case 8: // Guid
+////                        Guid g = GetGuid();
+////                        s += "GUID= " + g.ToString() + "\n";
+////                        break;
+////                    case 9: // bool false
+////                        s += "bool=false " + "\n";
+////                        break;
+////                    case 10: // bool true
+////                        s += "bool=true " + "\n";
+////                        break;
+//                default:
+//            }
+//            ValueType = mBuffer[mBufferIndex];
+//        }
+//
+//        SB.append("-------------------------------------------------------------------------");
+//
+//        mBufferIndex = CurrentBufferIndex;
+//        return SB.toString();
 	}
 }

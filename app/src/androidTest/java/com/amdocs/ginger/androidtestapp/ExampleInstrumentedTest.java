@@ -47,9 +47,21 @@ public class ExampleInstrumentedTest {
     private UiDevice device;
 
     @Test
-    public void startMainActivityFromHomeScreen()
+    public void GingerGrid()
     {
         ConnectToGingerGrid();
+    }
+
+    private void ConnectToGingerGrid() {
+        GingerSocketClient gingerSocketClient = new GingerSocketClient();
+        gingerSocketClient.connect();
+        // gingerSocketClient.ConnectAsync();
+    }
+
+    @Test
+    public void startMainActivityFromHomeScreen()
+    {
+
         // Initialize UiDevice instance
         UiDevice device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation());
 
@@ -73,10 +85,7 @@ public class ExampleInstrumentedTest {
                 LAUNCH_TIMEOUT);
     }
 
-    private void ConnectToGingerGrid() {
-        GingerSocketClient gingerSocketClient = new GingerSocketClient();
-        gingerSocketClient.connect();
-    }
+
 
 
     @Test
@@ -147,7 +156,8 @@ public class ExampleInstrumentedTest {
 
     }
 
-    private void PlatformTest() {
+    @Test
+    public void PlatformTest() {
         AndroidPlatform androidPlatform = new AndroidPlatform();
         IGingerAndroidElement elem = androidPlatform.LocateAndroidElement.LocateElementByID(eElementType.Button, "bid");
 
