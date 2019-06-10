@@ -1,4 +1,4 @@
-package com.amdocs.ginger.androidtestapp.ui.login;
+package com.amdocs.ginger.androidservice.ui.login;
 
 import android.app.Activity;
 import android.arch.lifecycle.Observer;
@@ -18,9 +18,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.amdocs.ginger.androidtestapp.R;
-import com.amdocs.ginger.androidtestapp.ui.login.LoginViewModel;
-import com.amdocs.ginger.androidtestapp.ui.login.LoginViewModelFactory;
+import com.amdocs.ginger.androidservice.R;
 
 public class LoginActivity extends AppCompatActivity {
 

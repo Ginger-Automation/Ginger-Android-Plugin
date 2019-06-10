@@ -1,11 +1,11 @@
-package com.amdocs.ginger.androidtestapp.ui.login;
+package com.amdocs.ginger.androidservice.ui.login;
 
 import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
 import android.support.annotation.NonNull;
 
-import com.amdocs.ginger.androidtestapp.data.LoginDataSource;
-import com.amdocs.ginger.androidtestapp.data.LoginRepository;
+import com.amdocs.ginger.androidservice.data.LoginDataSource;
+import com.amdocs.ginger.androidservice.data.LoginRepository;
 
 /**
  * ViewModel provider factory to instantiate LoginViewModel.

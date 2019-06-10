@@ -1,6 +1,6 @@
-package com.amdocs.ginger.androidtestapp.data;
+package com.amdocs.ginger.androidservice.data;
 
-import com.amdocs.ginger.androidtestapp.data.model.LoggedInUser;
+import com.amdocs.ginger.androidservice.data.model.LoggedInUser;
 
 import java.io.IOException;
 

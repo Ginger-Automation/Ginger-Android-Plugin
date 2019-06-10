@@ -1,4 +1,4 @@
-package com.amdocs.ginger.androidtestapp.data.model;
+package com.amdocs.ginger.androidservice.data.model;
 
 /**
  * Data class that captures user information for logged in users retrieved from LoginRepository

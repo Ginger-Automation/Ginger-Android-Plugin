@@ -3,7 +3,7 @@ package com.amdocs.ginger.plugin.platform;
 public interface IAndroidPlatform //: IPlatformService
 {
 
-    IDeviceActions DeviceActions = null;
+    public abstract IDeviceActions DeviceActions();
 
     ILocateAndroidElement LocateAndroidElement = null;
 

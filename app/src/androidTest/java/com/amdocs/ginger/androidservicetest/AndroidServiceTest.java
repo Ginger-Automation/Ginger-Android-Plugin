@@ -1,7 +1,6 @@
-package com.amdocs.ginger.androidtestapp;
+package com.amdocs.ginger.androidservicetest;
 
 import android.app.Instrumentation;
-import android.bluetooth.BluetoothClass;
 import android.content.Context;
 import android.content.Intent;
 import android.support.test.InstrumentationRegistry;
@@ -10,7 +9,7 @@ import android.support.test.InstrumentationRegistry;
 
 import android.support.test.runner.AndroidJUnit4;
 
-import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -19,15 +18,14 @@ import androidx.test.uiautomator.UiDevice;
 // import android.tes
 
 // import androidx.test.runner.AndroidJUnit4;
-import androidx.test.uiautomator.UiDevice;
 import androidx.test.uiautomator.By;
 import androidx.test.uiautomator.Until;
 
-import com.amdocs.ginger.androidtestapp.AndroidDevice;
+import com.amdocs.ginger.androidservice.AndroidDevice;
+import com.amdocs.ginger.androidservice.AndroidPlatform;
 import com.amdocs.ginger.plugin.core.CommLib.GingerSocketClient;
 import com.amdocs.ginger.plugin.core.GingerAction;
-import com.amdocs.ginger.plugin.platform.IGingerAndroidElement;
-import com.amdocs.ginger.plugin.platform.eElementType;
+import com.amdocs.ginger.plugin.platform.IAndroidPlatform;
 
 import static org.junit.Assert.*;
 
@@ -37,16 +35,57 @@ import static org.junit.Assert.*;
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
 @RunWith(AndroidJUnit4.class)
-public class ExampleInstrumentedTest {
+public class AndroidServiceTest {
 
 
     private static final String BASIC_SAMPLE_PACKAGE
             = "com.example.android.testing.uiautomator.BasicSample";
     private static final int LAUNCH_TIMEOUT = 5000;
     private static final String STRING_TO_BE_TYPED = "UiAutomator";
-    private UiDevice device;
+    // private UiDevice device;
+
+    static IAndroidPlatform androidDevice;
+
+    @Before
+    public void setUp()
+    {
+        Instrumentation instrumentation = InstrumentationRegistry.getInstrumentation();
+        UiDevice device = UiDevice.getInstance(instrumentation);
+
+        androidDevice = new AndroidPlatform(device);
+
+        // androidDevice.Wakeup(gingerAction);
+        androidDevice.DeviceActions().WakeUp();
+        androidDevice.DeviceActions().PressHome();
+
+        //androidDevice = new AndroidDevice();
+        //GingerAction gingerAction = new GingerAction();
+
+        //androidDevice.pressHome(gingerAction);
+    }
 
     @Test
+    public void PressApps()
+    {
+        // Arrange
+
+        //Act
+        androidDevice.DeviceActions().PressApps();
+        String s = androidDevice.DeviceActions().GetPageSource();
+
+        //Assert
+        assertTrue(s.contains("com.sec.android.app.launcher:id/apps_grid"));
+
+    }
+
+    @Test
+    public void PressHome()
+    {
+        androidDevice.DeviceActions().PressHome();
+    }
+
+
+    //@Test
     public void GingerGrid()
     {
         ConnectToGingerGrid();
@@ -58,7 +97,7 @@ public class ExampleInstrumentedTest {
         // gingerSocketClient.ConnectAsync();
     }
 
-    @Test
+    //@Test
     public void startMainActivityFromHomeScreen()
     {
 
@@ -88,10 +127,10 @@ public class ExampleInstrumentedTest {
 
 
 
-    @Test
+    //@Test
     public void useAppContext() {
 
-        Init();
+
 
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
@@ -101,10 +140,10 @@ public class ExampleInstrumentedTest {
 
     }
 
-    @Test
+    //@Test
     public void PressHomeTest() {
 
-        Init();
+
 
         AndroidDevice androidDevice = new AndroidDevice();
 
@@ -128,13 +167,14 @@ public class ExampleInstrumentedTest {
     @Test
     public void RotateLeft() {
 
-        Init();
+        // Init();
 
-        AndroidDevice androidDevice = new AndroidDevice();
+        // AndroidDevice androidDevice = new AndroidDevice();
 
-        GingerAction gingerAction = new GingerAction();
-        androidDevice.RotateLeft(gingerAction);
+        //GingerAction gingerAction = new GingerAction();
+        //androidDevice.RotateLeft(gingerAction);
 
+        androidDevice.DeviceActions().RotateLeft();
         // assertEquals("Home button pressed", gingerAction.ExInfo);
         //assertTrue(gingerAction.Error); Equals("Home button pressed", gingerAction.ExInfo);
 
@@ -144,33 +184,25 @@ public class ExampleInstrumentedTest {
     @Test
     public void RotateRight() {
 
-        Init();
+        //Init();
 
-        AndroidDevice androidDevice = new AndroidDevice();
+        //AndroidDevice androidDevice = new AndroidDevice();
 
-        GingerAction gingerAction = new GingerAction();
-        androidDevice.RotateRight(gingerAction);
+        // GingerAction gingerAction = new GingerAction();
+        androidDevice.DeviceActions().RotateRight();
 
         // assertEquals("Home button pressed", gingerAction.ExInfo);
         //assertTrue(gingerAction.Error); Equals("Home button pressed", gingerAction.ExInfo);
 
     }
 
-    @Test
+    //@Test
     public void PlatformTest() {
-        AndroidPlatform androidPlatform = new AndroidPlatform();
-        IGingerAndroidElement elem = androidPlatform.LocateAndroidElement.LocateElementByID(eElementType.Button, "bid");
+        // AndroidPlatform androidPlatform = new AndroidPlatform();
+        // IGingerAndroidElement elem = androidPlatform.LocateAndroidElement.LocateElementByID(eElementType.Button, "bid");
 
     }
 
 
-    private void Init()
-    {
-        if (AndroidDevice.device == null)
-        {
-            Instrumentation ii = InstrumentationRegistry.getInstrumentation();
-            AndroidDevice.device = UiDevice.getInstance(ii);
-        }
-    }
 
 }

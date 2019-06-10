@@ -1,4 +1,4 @@
-package com.amdocs.ginger.androidtestapp.data;
+package com.amdocs.ginger.androidservice.data;
 
 /**
  * A generic class that holds a result success w/ data or an error exception.

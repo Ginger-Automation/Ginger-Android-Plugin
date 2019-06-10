@@ -1,4 +1,4 @@
-package com.amdocs.ginger.androidtestapp;
+package com.amdocs.ginger.androidservice;
 
 import android.os.RemoteException;
 
@@ -7,7 +7,6 @@ import androidx.test.uiautomator.UiObject;
 import androidx.test.uiautomator.UiObjectNotFoundException;
 import androidx.test.uiautomator.UiSelector;
 
-import com.amdocs.ginger.plugin.core.GingerAction;
 import com.amdocs.ginger.plugin.core.GingerAction;
 import com.amdocs.ginger.plugin.core.IGingerAction;
 
@@ -35,20 +34,12 @@ public class AndroidDevice {
 
     public void RotateLeft(GingerAction gingerAction)
     {
-        try {
-            device.setOrientationLeft();
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        }
+
     }
 
     public void RotateRight(GingerAction gingerAction)
     {
-        try {
-            device.setOrientationRight();
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        }
+
     }
 
 
@@ -56,12 +47,7 @@ public class AndroidDevice {
     {
         // UiObject UIO =  FindElement(LocateBy, LocateValue, ElementType);
         // UiObject UIO = device.findObject(new UiSelector().resourceId("Apps"));
-        UiObject UIO = device.findObject(new UiSelector().description("Apps"));
-        try {
-            UIO.click();
-        } catch (UiObjectNotFoundException e) {
-            e.printStackTrace();
-        }
+
 
 
     }

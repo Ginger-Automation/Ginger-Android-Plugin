@@ -1,7 +1,5 @@
 package com.amdocs.ginger.plugin.core.CommLib;
 
-import com.amdocs.ginger.androidtestapp.AndroidDevice;
-
 import java.io.*;
 import java.net.*;
 

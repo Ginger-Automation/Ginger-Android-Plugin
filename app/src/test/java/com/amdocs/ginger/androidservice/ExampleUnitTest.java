@@ -1,4 +1,4 @@
-package com.amdocs.ginger.androidtestapp;
+package com.amdocs.ginger.androidservice;
 
 import org.junit.Test;
 

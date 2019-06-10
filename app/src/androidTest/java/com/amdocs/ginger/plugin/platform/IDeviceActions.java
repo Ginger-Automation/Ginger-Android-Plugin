@@ -1,6 +1,17 @@
 package com.amdocs.ginger.plugin.platform;
 
-interface IDeviceActions
+public interface IDeviceActions
 {
-    void WakeUp();
+
+    public void WakeUp();
+
+    public void PressHome();
+
+    public void PressApps();
+
+    public void RotateLeft();
+
+    public void RotateRight();
+
+    String GetPageSource();
 }

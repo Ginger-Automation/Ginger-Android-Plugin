@@ -1,14 +1,14 @@
-package com.amdocs.ginger.androidtestapp.ui.login;
+package com.amdocs.ginger.androidservice.ui.login;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 import android.util.Patterns;
 
-import com.amdocs.ginger.androidtestapp.data.LoginRepository;
-import com.amdocs.ginger.androidtestapp.data.Result;
-import com.amdocs.ginger.androidtestapp.data.model.LoggedInUser;
-import com.amdocs.ginger.androidtestapp.R;
+import com.amdocs.ginger.androidservice.data.LoginRepository;
+import com.amdocs.ginger.androidservice.data.Result;
+import com.amdocs.ginger.androidservice.data.model.LoggedInUser;
+import com.amdocs.ginger.androidservice.R;
 
 public class LoginViewModel extends ViewModel {
 

@@ -1,4 +1,4 @@
-package com.amdocs.ginger.androidtestapp.ui.login;
+package com.amdocs.ginger.androidservice.ui.login;
 
 import android.support.annotation.Nullable;
 
