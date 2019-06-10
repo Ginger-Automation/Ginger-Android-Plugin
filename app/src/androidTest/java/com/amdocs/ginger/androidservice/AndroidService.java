@@ -1,8 +1,6 @@
-package com.amdocs.ginger.androidtestapp;
+package com.amdocs.ginger.androidservice;
 
 import android.util.Log;
-
-import androidx.test.uiautomator.UiDevice;
 
 import com.amdocs.ginger.plugin.core.IGingerAction;
 
