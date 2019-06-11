@@ -25,13 +25,24 @@ class LocateAndroidElement implements ILocateAndroidElement {
 
         // UiObject UIO = mDevice.findObject(new UiSelector().resourceId(id));
         UiObject2 UIO2 = mDevice.findObject(By.descContains(id));
+        if (UIO2 != null)
+        {
+            TextBox txt = new TextBox(UIO2);
+            return txt;
+        }
+        else
+        {
+            // !!!!!!!!!
+            // throw new Exception("aaa");
+            return  null;
+
+        }
         //UiObject2 wifiops = device.findObject(By.text("WLAN"));
         //TODO: check not null
 
         // if element type = textbox ....
 
-        TextBox txt = new TextBox(UIO2);
-        return txt;
+
     }
 
     @Override

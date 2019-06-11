@@ -93,15 +93,20 @@ public class AndroidServiceTest {
     @Test
     public void EnterEmail()
     {
-        String pageSource = androidDevice.DeviceActions().GetPageSource();
+        // Arrange
+
+        String txt = "Hello";
+        // String pageSource = androidDevice.DeviceActions().GetPageSource();
         // IGingerAndroidElement aaa =  androidDevice.LocateAndroidElement().LocateElementByID(eElementType.TextBox, "com.amdocs.ginger.androidtestapp:id/username");
-        IGingerAndroidElement aaa =  androidDevice.LocateAndroidElement().LocateElementByID(eElementType.TextBox, "userid");
 
-        TextBox textBox = (TextBox)aaa;
-        for (int i=0;i<100;i++) {
-            textBox.SetText("hello " + i);
-        }
+        // Act
+        IGingerAndroidElement element =  androidDevice.LocateAndroidElement().LocateElementByID(eElementType.TextBox, "userid");
+        TextBox textBox = (TextBox)element;
+        textBox.SetText(txt);
+        String elementText = textBox.GetText();
 
+        // Assert
+        assertEquals(txt, elementText);
     }
 
 
