@@ -1,4 +1,4 @@
-package com.amdocs.ginger.plugin.platform;
+package com.amdocs.ginger.plugin.platform.UIElements;
 
 public enum eElementType
 {

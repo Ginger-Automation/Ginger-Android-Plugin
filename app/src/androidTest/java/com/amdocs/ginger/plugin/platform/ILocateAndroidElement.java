@@ -1,6 +1,8 @@
 package com.amdocs.ginger.plugin.platform;
 
 
+import com.amdocs.ginger.plugin.platform.UIElements.eElementType;
+
 public interface ILocateAndroidElement
 {
     IGingerAndroidElement LocateElementByID(eElementType elementType, String id);
@@ -14,6 +16,8 @@ public interface ILocateAndroidElement
     IGingerAndroidElement LocateElementByLinkTest(eElementType elementType,String LocateValue);
 
     IGingerAndroidElement LocateElementByPartiallinkText(eElementType elementType,String LocateValue);
+
     IGingerAndroidElement LocateElementByTag(eElementType elementType,String LocateValue);
+
     IGingerAndroidElement LocateElementByName(eElementType elementType, String locateByValue);
 }

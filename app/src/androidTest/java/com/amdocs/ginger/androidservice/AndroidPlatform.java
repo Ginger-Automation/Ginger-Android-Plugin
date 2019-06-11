@@ -4,6 +4,7 @@ import androidx.test.uiautomator.UiDevice;
 
 import com.amdocs.ginger.plugin.platform.IAndroidPlatform;
 import com.amdocs.ginger.plugin.platform.IDeviceActions;
+import com.amdocs.ginger.plugin.platform.ILocateAndroidElement;
 
 public class AndroidPlatform implements IAndroidPlatform
 {
@@ -24,5 +25,10 @@ public class AndroidPlatform implements IAndroidPlatform
     @Override
     public IDeviceActions DeviceActions() {
         return deviceActions;
+    }
+
+    @Override
+    public ILocateAndroidElement LocateAndroidElement() {
+        return new LocateAndroidElement(mDevice);
     }
 }

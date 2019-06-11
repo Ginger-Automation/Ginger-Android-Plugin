@@ -23,9 +23,12 @@ import androidx.test.uiautomator.Until;
 
 import com.amdocs.ginger.androidservice.AndroidDevice;
 import com.amdocs.ginger.androidservice.AndroidPlatform;
+import com.amdocs.ginger.androidservice.TextBox;
 import com.amdocs.ginger.plugin.core.CommLib.GingerSocketClient;
 import com.amdocs.ginger.plugin.core.GingerAction;
 import com.amdocs.ginger.plugin.platform.IAndroidPlatform;
+import com.amdocs.ginger.plugin.platform.IGingerAndroidElement;
+import com.amdocs.ginger.plugin.platform.UIElements.eElementType;
 
 import static org.junit.Assert.*;
 
@@ -56,7 +59,10 @@ public class AndroidServiceTest {
 
         // androidDevice.Wakeup(gingerAction);
         androidDevice.DeviceActions().WakeUp();
-        androidDevice.DeviceActions().PressHome();
+
+
+
+        // androidDevice.DeviceActions().PressHome();
 
         //androidDevice = new AndroidDevice();
         //GingerAction gingerAction = new GingerAction();
@@ -84,6 +90,20 @@ public class AndroidServiceTest {
         androidDevice.DeviceActions().PressHome();
     }
 
+    @Test
+    public void EnterEmail()
+    {
+        String pageSource = androidDevice.DeviceActions().GetPageSource();
+        // IGingerAndroidElement aaa =  androidDevice.LocateAndroidElement().LocateElementByID(eElementType.TextBox, "com.amdocs.ginger.androidtestapp:id/username");
+        IGingerAndroidElement aaa =  androidDevice.LocateAndroidElement().LocateElementByID(eElementType.TextBox, "userid");
+
+        TextBox textBox = (TextBox)aaa;
+        for (int i=0;i<100;i++) {
+            textBox.SetText("hello " + i);
+        }
+
+    }
+
 
     //@Test
     public void GingerGrid()
@@ -97,7 +117,7 @@ public class AndroidServiceTest {
         // gingerSocketClient.ConnectAsync();
     }
 
-    //@Test
+    @Test
     public void startMainActivityFromHomeScreen()
     {
 
@@ -111,6 +131,8 @@ public class AndroidServiceTest {
         final String launcherPackage = device.getLauncherPackageName();
         // assertThat(launcherPackage, notNullValue());
         // device.wait(Until.hasObject(By.pkg(launcherPackage).depth(0)), LAUNCH_TIMEOUT);
+
+
 
         // Launch the app
         Context context = ApplicationProvider.getApplicationContext();

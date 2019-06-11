@@ -2,7 +2,7 @@ package com.amdocs.ginger.plugin.platform;
 
 public interface IGingerAndroidElement
 {
-    Object Element = null;
+    public Object Element = null;
 
     //void DragAndDrop(String DragDropType,IGingerWebElement Element);
 

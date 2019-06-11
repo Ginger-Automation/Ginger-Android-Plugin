@@ -5,6 +5,6 @@ public interface IAndroidPlatform //: IPlatformService
 
     public abstract IDeviceActions DeviceActions();
 
-    ILocateAndroidElement LocateAndroidElement = null;
+    abstract ILocateAndroidElement LocateAndroidElement();
 
 }

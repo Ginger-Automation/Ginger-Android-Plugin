@@ -13,6 +13,9 @@ import com.amdocs.ginger.plugin.core.IGingerAction;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
+
+// NOT USED !!!!!!!!!!!!!!!!!
+
 public class AndroidDevice {
 
     public static UiDevice device;
