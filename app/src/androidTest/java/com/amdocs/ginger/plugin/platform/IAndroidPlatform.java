@@ -7,4 +7,6 @@ public interface IAndroidPlatform //: IPlatformService
 
     abstract ILocateAndroidElement LocateAndroidElement();
 
+    public abstract IPhone Phone();
+
 }

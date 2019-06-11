@@ -90,6 +90,13 @@ public class AndroidServiceTest {
         androidDevice.DeviceActions().PressHome();
     }
 
+
+    @Test
+    public void dial()
+    {
+        androidDevice.Phone().Dial("1234");
+    }
+
     @Test
     public void EnterEmail()
     {
