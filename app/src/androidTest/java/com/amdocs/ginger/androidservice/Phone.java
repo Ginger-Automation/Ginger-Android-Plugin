@@ -17,7 +17,7 @@ public class Phone implements IPhone {
     @Override
     public void Dial(String number)
     {
-        Intent phoneIntent = new Intent(Intent.ACTION_CALL);
+        Intent phoneIntent = new Intent(Intent.ACTION_DIAL);
         phoneIntent.setData(Uri.parse("tel:91-000-000-0000"));
 
         //TODO: check permssion or add

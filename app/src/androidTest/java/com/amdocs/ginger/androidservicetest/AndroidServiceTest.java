@@ -1,13 +1,24 @@
 package com.amdocs.ginger.androidservicetest;
 
 import android.app.Instrumentation;
+import android.app.UiAutomation;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.media.AudioFormat;
+import android.media.AudioRecord;
+import android.media.MediaPlayer;
+import android.media.MediaRecorder;
+import android.net.Uri;
+import android.os.Binder;
+import android.os.WorkSource;
+import android.provider.MediaStore;
 import android.support.test.InstrumentationRegistry;
 
 // import android.support.test.espresso.action. .uiautomator.UiDevice;
 
 import android.support.test.runner.AndroidJUnit4;
+import android.util.Log;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -30,6 +41,8 @@ import com.amdocs.ginger.plugin.platform.IAndroidPlatform;
 import com.amdocs.ginger.plugin.platform.IGingerAndroidElement;
 import com.amdocs.ginger.plugin.platform.UIElements.eElementType;
 
+import java.io.IOException;
+
 import static org.junit.Assert.*;
 
 /**
@@ -45,30 +58,17 @@ public class AndroidServiceTest {
             = "com.example.android.testing.uiautomator.BasicSample";
     private static final int LAUNCH_TIMEOUT = 5000;
     private static final String STRING_TO_BE_TYPED = "UiAutomator";
-    // private UiDevice device;
 
-    static IAndroidPlatform androidDevice;
+    static IAndroidPlatform mAndroidPlatform;
 
     @Before
     public void setUp()
     {
-        Instrumentation instrumentation = InstrumentationRegistry.getInstrumentation();
-        UiDevice device = UiDevice.getInstance(instrumentation);
-
-        androidDevice = new AndroidPlatform(device);
-
-        // androidDevice.Wakeup(gingerAction);
-        androidDevice.DeviceActions().WakeUp();
-
-
-
-        // androidDevice.DeviceActions().PressHome();
-
-        //androidDevice = new AndroidDevice();
-        //GingerAction gingerAction = new GingerAction();
-
-        //androidDevice.pressHome(gingerAction);
+        AndroidDevice.init();
+        mAndroidPlatform = new AndroidPlatform(AndroidDevice.UiDevice);
+        mAndroidPlatform.DeviceActions().WakeUp();
     }
+
 
     @Test
     public void PressApps()
@@ -76,8 +76,8 @@ public class AndroidServiceTest {
         // Arrange
 
         //Act
-        androidDevice.DeviceActions().PressApps();
-        String s = androidDevice.DeviceActions().GetPageSource();
+        mAndroidPlatform.DeviceActions().PressApps();
+        String s = mAndroidPlatform.DeviceActions().GetPageSource();
 
         //Assert
         assertTrue(s.contains("com.sec.android.app.launcher:id/apps_grid"));
@@ -87,14 +87,14 @@ public class AndroidServiceTest {
     @Test
     public void PressHome()
     {
-        androidDevice.DeviceActions().PressHome();
+        mAndroidPlatform.DeviceActions().PressHome();
     }
 
 
     @Test
     public void dial()
     {
-        androidDevice.Phone().Dial("1234");
+        mAndroidPlatform.Phone().Dial("1234");
     }
 
     @Test
@@ -107,7 +107,7 @@ public class AndroidServiceTest {
         // IGingerAndroidElement aaa =  androidDevice.LocateAndroidElement().LocateElementByID(eElementType.TextBox, "com.amdocs.ginger.androidtestapp:id/username");
 
         // Act
-        IGingerAndroidElement element =  androidDevice.LocateAndroidElement().LocateElementByID(eElementType.TextBox, "userid");
+        IGingerAndroidElement element =  mAndroidPlatform.LocateAndroidElement().LocateElementByID(eElementType.TextBox, "userid");
         TextBox textBox = (TextBox)element;
         textBox.SetText(txt);
         String elementText = textBox.GetText();
@@ -183,15 +183,15 @@ public class AndroidServiceTest {
 
         GingerAction gingerAction = new GingerAction();
 
-        androidDevice.Wakeup(gingerAction);
+        mAndroidPlatform.DeviceActions().WakeUp();
 
         // androidDevice.
 
-        androidDevice.pressHome(gingerAction);
+        mAndroidPlatform.DeviceActions().PressHome();
 
-        String s = androidDevice.GetPageSource();
+        String s = mAndroidPlatform.DeviceActions().GetPageSource();
 
-        androidDevice.ClickApps(gingerAction);
+        // mAndroidPlatform.DeviceActions().ClickApps(gingerAction);
 
         //assertEquals("Home button pressed", gingerAction.ExInfo);
         //assertTrue(gingerAction.Error); Equals("Home button pressed", gingerAction.ExInfo);
@@ -208,7 +208,7 @@ public class AndroidServiceTest {
         //GingerAction gingerAction = new GingerAction();
         //androidDevice.RotateLeft(gingerAction);
 
-        androidDevice.DeviceActions().RotateLeft();
+        mAndroidPlatform.DeviceActions().RotateLeft();
         // assertEquals("Home button pressed", gingerAction.ExInfo);
         //assertTrue(gingerAction.Error); Equals("Home button pressed", gingerAction.ExInfo);
 
@@ -223,7 +223,7 @@ public class AndroidServiceTest {
         //AndroidDevice androidDevice = new AndroidDevice();
 
         // GingerAction gingerAction = new GingerAction();
-        androidDevice.DeviceActions().RotateRight();
+        mAndroidPlatform.DeviceActions().RotateRight();
 
         // assertEquals("Home button pressed", gingerAction.ExInfo);
         //assertTrue(gingerAction.Error); Equals("Home button pressed", gingerAction.ExInfo);

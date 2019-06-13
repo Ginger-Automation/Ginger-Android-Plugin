@@ -12,7 +12,7 @@ public class AndroidService
         Log.d("Ginger", "Before press home");
 
         // Act
-        AndroidDevice.device.pressHome();
+        AndroidDevice.UiDevice.pressHome();
 
         // Info
         Log.d("Ginger", "After press home");

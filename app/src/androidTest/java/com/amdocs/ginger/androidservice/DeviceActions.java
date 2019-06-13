@@ -1,6 +1,7 @@
 package com.amdocs.ginger.androidservice;
 
 
+import android.graphics.Bitmap;
 import android.os.RemoteException;
 
 import androidx.test.uiautomator.UiDevice;
@@ -81,4 +82,13 @@ public class DeviceActions implements IDeviceActions {
 
         return os.toString();
     }
+
+
+
+    public Bitmap TakeScreenshot()
+    {
+        Bitmap bmp = AndroidDevice.UiAutomation.takeScreenshot();
+        return bmp;
+    }
+
 }
